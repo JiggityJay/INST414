@@ -33,33 +33,33 @@ if not df.empty:
         print(f"{col}: {df[col].nunique()} unique values")
 
     # Replace "column_name" with an actual numerical column name
-    numerical_column = "some_numeric_column"  # Update with the correct column name
+    numerical_column = "maternal_deaths"  # Update with the correct column name
     if numerical_column in df.columns:
         # Histogram of the selected numerical column
         plt.figure(figsize=(8, 5))
-        sns.histplot(df[numerical_column], kde=True, bins=30)
-        plt.title(f"Distribution of {numerical_column}")
-        plt.xlabel(numerical_column)
+        sns.histplot(df[maternal_deaths], kde=True, bins=30)
+        plt.title(f"Distribution of {maternal_deaths}")
+        plt.xlabel(maternal_deaths)
         plt.ylabel("Frequency")
         plt.show()
 
         # Outlier Detection using IQR
-        Q1 = df[numerical_column].quantile(0.25)
-        Q3 = df[numerical_column].quantile(0.75)
+        Q1 = df[maternal_deaths].quantile(0.25)
+        Q3 = df[maternal_deaths].quantile(0.75)
         IQR = Q3 - Q1
-        outliers = df[(df[numerical_column] < (Q1 - 1.5 * IQR)) | 
-                      (df[numerical_column] > (Q3 + 1.5 * IQR))]
-        print(f"\nOutliers in {numerical_column}:\n", outliers)
+        outliers = df[(df[maternal_deaths] < (Q1 - 1.5 * IQR)) | 
+                      (df[maternal_deaths] > (Q3 + 1.5 * IQR))]
+        print(f"\nOutliers in {maternal_deaths}:\n", outliers)
     else:
-        print(f"Column '{numerical_column}' not found in the dataset.")
+        print(f"Column '{maternal_deaths}' not found in the dataset.")
 
     # Convert categorical variables into dummy/indicator variables
-    categorical_column = "some_category_column"  # Update with actual column name
+    categorical_column = "group"  # Update with actual column name
     if categorical_column in df.columns:
-        df = pd.get_dummies(df, columns=[categorical_column], drop_first=True)
+        df = pd.get_dummies(df, columns=[group], drop_first=True)
         print("\nCategorical variables have been converted into dummy variables.")
     else:
-        print(f"Column '{categorical_column}' not found for encoding.")
+        print(f"Column '{group}' not found for encoding.")
 
 else:
     print("No data available to analyze.")
